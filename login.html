@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario | Log in</title>
+</head>
+
+<body>
+    <h1>Iniciar sesión</h1>
+    <p>Ingrese su usuario y contraseña.</p>
+    <form action="success.html" method="POST">
+        <div>
+            <label for="txtIdUsuario">ID Usuario:</label>
+            <input type="text" id="txtIdUsuario" name="txtIdUsuario" placeholder="Ingrese su id usuario" required>
+        </div>
+        <div>
+            <label for="txtUsuario">Nombre Usuario:</label>
+            <input type="text" id="txtUsuario" name="txtUsuario" placeholder="Ingrese su usuario" required>
+        </div>
+        <div>
+            <label for="txtCorreo">Correo Electrónico:</label>
+            <input type="email" id="txtCorreo" name="txtCorreo" placeholder="ejemplo@ejemplo.com" required>
+        </div>
+        <div>
+            <label for="txtPassword">Contraseña:</label>
+            <input type="password" id="txtPassword" name="txtPassword" placeholder="Ingrese su contraseña" required>
+        </div>
+        <div>
+            <label for="selRol">Rol del usuario:</label>
+            <select name="" id="rol" required>
+                <option value="" selected>Seleccione...</option>
+                <option value="admin" disabled>Administrador</option>
+                <option value="vendedor">Vendedor</option>
+                <option value="cliente">Cliente</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" id="btnLogin" name="btnLogin">Log in.</button>
+        </div>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Month</th>
+                    <th>Savings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>January</td>
+                    <td>$100</td>
+                  </tr>
+                  <tr>
+                    <td>February</td>
+                    <td>$80</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Sum</td>
+                    <td>$180</td>
+                  </tr>
+                </tfoot>
+              </table>
+        </div>
+    </form>
+    <div>
+        <a href="C:\Users\SEBAS\Documents\Inventario-Grupo-T\recuperar.html">¿Has olvidado tu contraseña?</a>
+        <a href="https://www.uninorte.edu.co/"><img src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\Imagen.jpg"
+            alt="UniNorte" style="width:200px;height:200px;"></a>
+            <a href="https://www.uninorte.edu.co/">Universidad del norte</a>
+    </div>
+</body>
+
+</html>
