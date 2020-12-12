@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="C:\Users\SEBAS\Documents\Inventario-Grupo-T\css\prueba.css">
+    <script src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\js\backend.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <title>Inventario | Log in</title>
+</head>
+
+<body>
+    <h1>Actualizar Productos</h1>
+    <p>Diligencie los campos a continuación.</p>
+    <form id="registrarUsuario" action="home.html" method="POST">
+        <div class="container">
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <label for="txtReferencia" class="form-label">Referencia:</label>
+                    <input type="text" id="txtReferencia" class="form-control" name="txtReferencia"
+                        placeholder="Ingrese la referencia" required>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <label for="txtNomProducto" class="form-label">Nombre del producto:</label>
+                    <input type="text" id="txtNomProducto" class="form-control" name="txtNomProducto"
+                        placeholder="Nombre del producto" required>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <label for="txtCantidad" class="form-label">Cantidad:</label>
+                    <input type="text" id="txtCantidad" class="form-control" name="txtUsuario"
+                        placeholder="Cantidad del producto" required>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <label for="txtPrecio" class="form-label">Precio:</label>
+                    <input type="text" id="txtPrecio" class="form-control" name="txtPrecio"
+                        placeholder="Precio del producto" required>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <label for="imagen" class="form-label">Imagen:</label>
+                    <input type="file" id="imagen" class="form-control form-control-sm" name="imagen"
+                        placeholder="Imagen del producto" required>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-outline-primary" id="btnRegistrar" name="btnRegistrar">Registrar producto.</button>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+                <div class="col-md-4">
+                    <a href="home.html" class="btn btn-outline-primary" role="button">Regresar al home.</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        <div>
+            <a href="https://www.uninorte.edu.co/"><img src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\img\Imagen.jpg"
+                    alt="UniNorte" style="width:100px;height:100px;"></a>
+        </div>
+    </div>
+</body>
+
+</html>

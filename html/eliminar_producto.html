@@ -13,27 +13,33 @@
   <script src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\js\backend.js"></script>
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-  <title>Inventario | Log in</title>
+  <title>Inventario | Eliminar</title>
 </head>
 
 <body>
-  <h1>Recuperar contraseña</h1>
-  <p>Ingrese su correo electrónico para recibir una nueva contraseña.</p>
-  <form action="login.html" method="POST">
+  <h1>Eliminar Productos</h1>
+  <p>Ingrese la referencia del producto a eliminar.</p>
+  <form action="home.html" method="POST">
     <div class="container">
       
       <div class="row d-flex justify-content-center mb-3">
-        <div class="col-md-4 form-floating">
-            <input type="email" id="txtCorreo" class="form-control" name="txtCorreo" placeholder="ejemplo@ejemplo.com"
+        <div class="col-md-4">
+            <label for="txtReferencia" class="form-label">Referencia:</label>
+            <input type="text" id="txtReferencia" class="form-control" name="txtReferencia" placeholder="Referencia"
               required>
-            <label for="txtCorreo" class="form-label">Correo Electrónico:</label>
           </div>
       </div>
       <div class="row d-flex justify-content-center mb-3">
         <div class="col-md-4">
-          <button type="submit" class="btn btn-outline-success" id="btnRecuperar" name="btnRecuperar">Recuperar contraseña.</button>
+          <button type="submit" class="btn btn-outline-danger" id="btnEliminar" name="btnEliminar">Eliminar producto.</button>
         </div>
       </div>
+      <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-4">
+                <a href="home.html" class="btn btn-outline-primary" role="button">Regresar al home.</a>
+        </div>
+      </div>
+      
     </div>
   </form>
   <div>

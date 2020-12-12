@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="C:\Users\SEBAS\Documents\Inventario-Grupo-T\css\prueba.css">
+    <script src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\js\backend.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <title>Inventario | Consultar</title>
+</head>
+
+<body>
+    <h1>Consultar Productos.</h1>
+    <p>Ingrese la referencia o el nombre del producto a buscar.</p>
+    <div class="container">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Buscar:</span>
+            <input id="txtBuscar" type="text" class="search form-control" placeholder="Que es lo que busca?">
+        </div>
+        <table class="table table-dark table-hover table-bordered border-light results">
+            <thead>
+                <tr>
+                    <th class="col-md-1">#</th>
+                    <th class="col-md-2">Referencia</th>
+                    <th class="col-md-2">Nombre</th>
+                    <th class="col-md-2">Precio</th>
+                    <th class="col-md-2">Cantidad</th>
+                </tr>
+                <tr class="warning no-result">
+                    <td colspan="5"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Vatanay Özbeyli</td>
+                    <td>UI & UX</td>
+                    <td>Istanbul</td>
+                    <td>Istanbul</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Burak Özkan</td>
+                    <td>Software Developer</td>
+                    <td>Istanbul</td>
+                    <td>Istanbul</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Egemen Özbeyli</td>
+                    <td>Purchasing</td>
+                    <td>Kocaeli</td>
+                    <td>Kocaeli</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Engin Kızıl</td>
+                    <td>Sales</td>
+                    <td>Bozuyük</td>
+                    <td>Bozuyük</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a href="home.html" class="btn btn-outline-primary" role="button">Regresar al home.</a>
+        </div>
+    </div>
+    <div>
+        <div>
+            <a href="https://www.uninorte.edu.co/"><img src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\img\Imagen.jpg"
+                    alt="UniNorte" style="width:100px;height:100px;"></a>
+        </div>
+    </div>
+</body>
+
+</html>

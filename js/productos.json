@@ -1,0 +1,55 @@
+{
+    "productos": [
+        {
+            "referencia": "1",
+            "nombre": "Aretes",
+            "precio": 50000,
+            "cantidad": 1000,
+            "img": "aretes.jpg"
+        },
+        {
+            "referencia": "2",
+            "nombre": "Relojes",
+            "precio": 100000,
+            "cantidad": 1000,
+            "img": "relojes.jpg"
+        },
+        {
+            "referencia": "3",
+            "nombre": "Pulseras",
+            "precio": 30000,
+            "cantidad": 1000,
+            "img": "pulseras.jpg"
+        },
+        {
+            "referencia": "4",
+            "nombre": "Cadenas",
+            "precio": 120000,
+            "cantidad": 1000,
+            "img": "cadenas.jpg"
+        },
+        {
+            "referencia": "5",
+            "nombre": "Anillos",
+            "precio": 80000,
+            "cantidad": 1000,
+            "img": "anillos.jpg"
+        }
+    ],
+    "usuarios": [
+        {
+            "id": "123456789",
+            "nombre": "Admin",
+            "correo": "admin@admin.com",
+            "nombre_usuario": "admin",
+            "contraseña": "123"
+        },
+        {
+            "id": "123456789",
+            "nombre": "Vendor",
+            "correo": "vendor@vendor.com",
+            "nombre_usuario": "vendor",
+            "contraseña": "456"
+        }
+    ]
+}
