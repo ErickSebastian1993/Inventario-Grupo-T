@@ -1,0 +1,14 @@
+/* .container{
+    background-image: url("../img/tienda.jpg");
+} */
+
+body{
+    text-align: center;
+    background-image: url("../img/tienda.jpg");
+    /* background-color: yellow; */
+}
+
+div{
+    text-align: center;
+    
+}
