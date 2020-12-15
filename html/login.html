@@ -17,38 +17,28 @@
 </head>
 
 <body>
-  <h1>Iniciar sesión</h1>
-  <p>Ingrese su usuario y contraseña.</p>
-  <form id="registrarUsuario" action="home.html" method="POST">
-    <div class="container">
-      <div class="row d-flex justify-content-center mb-3">
-        <div class="col-md-4 form-floating">
-          <input type="text" id="txtUsuario" class="form-control" name="txtUsuario" placeholder="Ingrese su usuario"
-            required>
-          <label for="txtUsuario" class="form-label">Usuario:</label>
+  <div class="container">
+    <div class="form-container sign-in-container">
+      <form id="logIn" action="home.html" method="POST">
+        <h1>Iniciar sesión</h1>
+        <p>Ingrese su usuario y contraseña.</p>
+        <div class="row mb-3">
+          <label for="txtUsuario" class="col-md-1 col-form-label">Usuario:</label>
+          <div class="col-md-4">
+            <input type="text" id="txtUsuario" class="form-control" name="txtUsuario" placeholder="Ingrese su usuario"
+              required>
+          </div>
         </div>
-      </div>
-      <div class="row d-flex justify-content-center mb-3">
-        <div class="col-md-4 form-floating">
-          <input type="password" id="txtPassword" class="form-control" name="txtPassword"
-            placeholder="Ingrese su contraseña" required>
-          <label for="txtPassword" class="form-label">Contraseña:</label>
+        <div class="row mb-3">
+          <label for="txtPassword" class="col-md-1 col-form-label">Contraseña:</label>
+          <div class="col-md-4">
+            <input type="password" id="txtPassword" class="form-control" name="txtPassword"
+              placeholder="Ingrese su contraseña" required>
+          </div>
         </div>
-      </div>
-      <div class="row d-flex justify-content-center mb-3">
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-outline-primary" id="btnLogin" name="btnLogin">Iniciar sesión.</button>
-        </div>
-      </div>
-    </div>
-  </form>
-  <div>
-    <div>
-      <a class="btn btn-outline-info" href="recuperar.html" role="button">Ha olvidado su contraseña?</a>
-    </div>
-    <div>
-      <a href="https://www.uninorte.edu.co/"><img src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\img\Imagen.jpg"
-          alt="UniNorte" style="width:100px;height:100px;"></a>
+        <button type="submit" class="btn btn-outline-primary" id="btnLogin" name="btnLogin">Iniciar sesión.</button>
+        <a class="btn btn-outline-info" href="recuperar.html" role="button">Ha olvidado su contraseña?</a>
+      </form>
     </div>
   </div>
 </body>

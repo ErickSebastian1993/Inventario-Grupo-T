@@ -17,66 +17,55 @@
 </head>
 
 <body>
-    <h1>Registrar Usuario</h1>
-    <p>Diligencie los campos a continuación.</p>
-    <form id="registrarUsuario" action="home.html" method="POST">
-        <div class="container">
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4 form-floating">
-                    <input type="text" id="txtIdUsuario" class="form-control" name="txtIdUsuario"
-                        placeholder="Ingrese su id usuario" required>
-                    <label for="txtIdUsuario" class="form-label">ID Usuario:</label>
+    <div class="container">
+        <div class="form-container sign-in-container">
+            <form id="registrarUsuario" action="home.html" method="POST">
+                <h1>Registrar Usuario</h1>
+                <p>Diligencie los campos a continuación.</p>
+                <div class="row mb-3">
+                    <label for="txtIdUsuario" class="col-md-1 col-form-label">ID Usuario:</label>
+                    <div class="col-md-4">
+                        <input type="text" id="txtIdUsuario" class="form-control" name="txtIdUsuario"
+                            placeholder="Ingrese su id usuario" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4 form-floating">
-                    <input type="email" id="txtCorreo" class="form-control" name="txtCorreo"
-                        placeholder="ejemplo@ejemplo.com" required>
-                    <label for="txtCorreo" class="form-label">Correo Electrónico:</label>
+                <div class="row mb-3">
+                    <label for="txtCorreo" class="col-md-1 col-form-label">Correo Electrónico:</label>
+                    <div class="col-md-4">
+                        <input type="email" id="txtCorreo" class="form-control" name="txtCorreo"
+                            placeholder="ejemplo@ejemplo.com" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4 form-floating">
-                    <input type="text" id="txtUsuario" class="form-control" name="txtUsuario"
-                        placeholder="Ingrese su usuario" required>
-                    <label for="txtUsuario" class="form-label">Nombre Usuario:</label>
+                <div class="row mb-3">
+                    <label for="txtUsuario" class="col-md-1 col-form-label">Nombre Usuario:</label>
+                    <div class="col-md-4">
+                        <input type="text" id="txtUsuario" class="form-control" name="txtUsuario"
+                            placeholder="Ingrese su usuario" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4 form-floating">
-                    <input type="password" id="txtPassword" class="form-control" name="txtPassword"
-                        placeholder="Ingrese su contraseña" required>
-                    <label for="txtPassword" class="form-label">Contraseña:</label>
+                <div class="row mb-3">
+                    <label for="txtPassword" class="col-md-1 col-form-label">Contraseña:</label>
+                    <div class="col-md-4">
+                        <input type="password" id="txtPassword" class="form-control" name="txtPassword"
+                            placeholder="Ingrese su contraseña" required>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4 form-floating">
-                    <select name="" id="rol" class="form-select" required>
-                        <option selected>Seleccione...</option>
-                        <option value="admin" disabled>Administrador</option>
-                        <option value="vendedor">Vendedor</option>
-                        <option value="cliente">Cliente</option>
-                    </select>
-                    <label for="selRol" class="form-label">Rol del usuario:</label>
+                <div class="row mb-3">
+                    <label for="selRol" class="col-md-1 col-form-label">Rol del usuario:</label>
+                    <div class="col-md-4">
+                        <select name="" id="rol" class="form-select" required>
+                            <option selected>Seleccione...</option>
+                            <option value="admin" disabled>Administrador</option>
+                            <option value="vendedor">Vendedor</option>
+                            <option value="cliente">Cliente</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-outline-primary" id="btnRegistrar"
-                        name="btnRegistrar">Registrar.</button>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <div class="col-md-4">
-                    <a href="home.html" class="btn btn-outline-primary" role="button">Regresar al home.</a>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div>
-        <div>
-            <a href="https://www.uninorte.edu.co/"><img src="C:\Users\SEBAS\Documents\Inventario-Grupo-T\img\Imagen.jpg"
-                    alt="UniNorte" style="width:100px;height:100px;"></a>
+                <button type="submit" class="btn btn-outline-primary" id="btnRegistrar"
+                    name="btnRegistrar">Registrar.</button>
+
+                <a href="home.html" class="btn btn-outline-primary" role="button">Regresar al home.</a>
+            </form>
         </div>
     </div>
 </body>
