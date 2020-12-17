@@ -1,5 +1,5 @@
-from flask import Flask,render_template,url_for,flash,redirect
-from forms import FormularioLogin,FormularioRecuperar
+from flask import Flask,render_template,url_for,flash,redirect,request
+from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario
 
 app = Flask(__name__)
 app.config.update(SECRET_KEY="la_llave")
@@ -14,7 +14,14 @@ def index():
 
 @app.route("/home",methods=['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    usuario=FormularioNuevoUsuario()
+    if request.method=="POST":
+        if usuario.validate():
+            return redirect("/home")
+        else:
+            return render_template("home.html",form=usuario)
+    else:
+        return render_template("home.html",form=usuario)
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():
