@@ -1,12 +1,16 @@
-from flask import Flask,render_template,url_for
+from flask import Flask,render_template,url_for,flash,redirect
+from forms import FormularioLogin
 
 app = Flask(__name__)
+app.config.update(SECRET_KEY="la_llave")
 
-@app.route("/")
-@app.route("/index")
+@app.route("/",methods=['GET', 'POST'])
+@app.route("/index",methods=['GET', 'POST'])
 def index():
-    #return "Hello"
-    return render_template("index.html")
+    form = FormularioLogin()
+    if form.validate_on_submit():
+        return redirect("/home")
+    return render_template("index.html",form=form)
 
 @app.route("/home",methods=['GET', 'POST'])
 def home():

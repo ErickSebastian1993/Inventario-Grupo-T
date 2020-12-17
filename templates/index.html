@@ -3,24 +3,29 @@
 {% block contenido %} 
 <div class="container">
   <div class="form-container sign-in-container">
-    <form id="logIn" action="{{ url_for('home') }}" method="POST">
+    <form id="logIn" action="" method="POST" novalidate>
+      {{ form.hidden_tag() }} 
       <h1>Iniciar sesión</h1>
       <p>Ingrese su usuario y contraseña.</p>
       <div class="row mb-3">
         <label for="txtUsuario" class="col-sm-3 col-form-label">Usuario:</label>
         <div class="col-sm-9">
-          <input type="text" id="txtUsuario" class="form-control" name="txtUsuario" placeholder="Ingrese su usuario"
-            required>
+          {{form.user(class="form-control",id="txtUsuario",type="text",placeholder="Ingrese su usuario")}}
+          {% for error in form.user.errors %}
+            <span style="color: red;">{{ error }}</span>
+          {% endfor %}
         </div>
       </div>
       <div class="row mb-3">
         <label for="txtPassword" class="col-sm-3 col-form-label">Contraseña:</label>
         <div class="col-sm-9">
-          <input type="password" id="txtPassword" class="form-control" name="txtPassword"
-            placeholder="Ingrese su contraseña" required>
+          {{form.password(class="form-control",id="txtPassword",type="password",placeholder="Ingrese su contraseña")}}
+          {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+          {% endfor %}
         </div>
       </div>
-      <button type="submit" class="btn btn-outline-primary" id="btnLogin" name="btnLogin">Iniciar sesión.</button>
+      {{form.enviar(class="btn btn-outline-primary" ,id="btnLogin")}}
       <a class="btn btn-outline-info" href="{{ url_for('recuperar') }}" role="button">Ha olvidado su contraseña?</a>
     </form>
   </div>
