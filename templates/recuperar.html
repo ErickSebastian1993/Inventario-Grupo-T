@@ -4,22 +4,22 @@
 <body>
     <div class="container">
         <div class="form-container sign-in-container">
-            <form action="login.html" method="POST">
+            <form action="" method="POST" novalidate>
+                {{ form.hidden_tag() }} 
                 <h1>Recuperar contraseña</h1>
                 <p>Ingrese su correo electrónico para recibir una nueva contraseña.</p>
                 <div class="row mb-3">
                     <label for="txtCorreo" class="col-sm-4 form-label">Correo Electrónico:</label>
                     <div class="col-sm-6">
-                        <input type="email" id="txtCorreo" class="form-control" name="txtCorreo"
-                            placeholder="ejemplo@ejemplo.com" required>
+                        {{form.correo(class="form-control",id="txtCorreo",placeholder="ejemplo@ejemplo.com")}}
+                        {% for error in form.correo.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
                     </div>
                 </div>
-                <!-- <button type="submit" class="btn btn-outline-success" id="btnRecuperar" name="btnRecuperar">Recuperar
-                    contraseña.</button> -->
-                <button type="submit" id="btnRecuperar" name="btnRecuperar" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                    data-bs-whatever="@mdo">Recuperar contraseña.</button>
+                {{form.enviar(class="btn btn-outline-success" ,id="btnRecuperar")}}
             </form>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 {% endblock %}

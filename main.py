@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for,flash,redirect
-from forms import FormularioLogin
+from forms import FormularioLogin,FormularioRecuperar
 
 app = Flask(__name__)
 app.config.update(SECRET_KEY="la_llave")
@@ -18,7 +18,11 @@ def home():
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():
-    return render_template("recuperar.html")
+    form=FormularioRecuperar()
+    if form.validate_on_submit():
+        # Quisiera colocarle al usuario un timed pop up en la parte inferior izquierda diciendole que ya se le envio el correo
+        return redirect("/")
+    return render_template("recuperar.html",form=form)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5000,debug=True)
