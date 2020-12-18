@@ -25,3 +25,12 @@ class FormularioNuevoUsuario(FlaskForm):
     confirm=PasswordField('Confirmar contraseña')
     rol=SelectField('Rol',choices=[('Administrador','Administrador'),('Vendedor','Vendedor')])
     enviar=SubmitField('Registrar')
+
+class FormularioNuevoProducto(FlaskForm):
+    reference=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
+    product=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
+    cantidad=IntegerField('Cantidad',[
+        validators.DataRequired(message="Por favor indica el precio del producto"),
+        validators.NumberRange(min=1)
+    ])
+
