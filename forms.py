@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,validators
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators
 from wtforms.fields.html5 import EmailField
 
 class FormularioLogin(FlaskForm):
