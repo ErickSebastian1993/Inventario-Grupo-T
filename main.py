@@ -23,17 +23,11 @@ def home():
         if usuario.enviar.data and usuario.validate():
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
+            insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'Activo',producto.imagen.data)
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
             return redirect('/home')
     return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos)
-
-@app.route("/success",methods=['GET', 'POST'])
-def success():
-    producto = consultar_producto("cadenas")
-    productos = get_productos()
-
-    return render_template("success.html",productos = productos,producto = producto)
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():
