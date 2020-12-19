@@ -23,12 +23,7 @@ def home():
         if usuario.enviar.data and usuario.validate():
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
-<<<<<<< HEAD
             insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'Activo',producto.imagen.data)
-=======
-            #insertar_producto(producto.referencia,producto.producto,producto.precio,producto.cantidad,'ACTIVO',producto.imagen)
-            #flash("producto creado")
->>>>>>> 70d5fb34cf9a1e8d1e636c51ee4e7cd6cec07aec
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
             return redirect('/home')
