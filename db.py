@@ -30,7 +30,8 @@ def get_productos():
     return productos
 
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
-    query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"',"+precio+", "+cantidad+",'ACTIVO',"+imagen+");"
+    query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"','"+str(precio)+"', '"+str(cantidad)+"','"+estado+"','"+imagen+"');"
+
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
