@@ -30,7 +30,6 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo usuario</a></li>
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2">Nuevo producto</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('success') }}">Success</a></li>
           <li><a class="dropdown-item" href="{{ url_for('index') }}">Salir</a></li>
         </ul>
       </div>
@@ -49,14 +48,42 @@
     <div class="row">
       {% for producto in productos %}
       <div class="card" style="width: 18rem;">
-        <img src="{{producto[5]}}" class="col-sm-6" alt="...">
+        <div class="text-center">
+          <img height="100" width="100" src="{{producto[5]}}" class="col-sm-6" alt="...">
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{producto[1]}}</h5>
-          <label for="">Referencia:</label>
-          <p class="card-text">{{producto[0]}}</p>
-          <label for="">Precio:</label><p class="card-text">{{producto[2]}}</p>
-          <label for="">Cantidad:</label><p class="card-text">{{producto[3]}}</p>
-          <label for="">Estado:</label><p class="card-text">{{producto[4]}}</p>
+          <div class="row">
+            <div class="col-sm-6">
+              <h5>Producto: </h5>
+            </div>
+            <div class="col-sm-6">
+              <h5 class="card-title">{{producto[1]}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="">Precio:</label>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text">{{producto[2]}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="">Cantidad:</label>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text">{{producto[3]}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="">Estado:</label>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text">{{producto[4]}}</p>
+            </div>
+          </div>
           <div class="text-center">
             <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3"" >Editar</a>
           </div>
