@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators,FileField
 from wtforms.fields.html5 import EmailField
+from wtforms.validators import ValidationError
 
 class FormularioLogin(FlaskForm):
     user = StringField('Usuario', [validators.DataRequired(message="Por favor completa con el usuario")])
@@ -27,10 +28,54 @@ class FormularioNuevoUsuario(FlaskForm):
     enviar=SubmitField('Registrar')
 
 class FormularioNuevoProducto(FlaskForm):
-    reference=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
-    product=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
-    cantidad=IntegerField('Cantidad',[
-        validators.DataRequired(message="Por favor indica el precio del producto"),
-        validators.NumberRange(min=1)
-    ])
+    referencia=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
+    producto=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
+    cantidad=StringField('Cantidad')
+    precio=StringField('Precio')
+    imagen=FileField('Imagen')
+    enviar2=SubmitField('Crear producto')
+    def validate_precio(form,field):
+        try:
+            res=int(field.data)
+        except Exception:
+            raise ValidationError('Precio no valido')
+
+        if res<0:
+            raise ValidationError("Costo del producto no puede ser negativo")
+
+    def validate_cantidad(form,field):
+        try:
+            res=int(field.data)
+        except Exception:
+            raise ValidationError('Cantidad no valida')
+
+        if res<1:
+            raise ValidationError("Minimo debe haber un producto")
+
+class FormularioActualizarAdmin(FlaskForm):
+    referencia=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
+    producto=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
+    cantidad=StringField('Cantidad')
+    precio=StringField('Precio')
+    imagen=FileField('Imagen')
+    enviar3=SubmitField('Actualizar')
+
+    def validate_precio(form,field):
+        try:
+            res=int(field.data)
+        except Exception:
+            raise ValidationError('Precio no valido')
+
+        if res<0:
+            raise ValidationError("Costo del producto no puede ser negativo")
+
+    def validate_cantidad(form,field):
+        try:
+            res=int(field.data)
+        except Exception:
+            raise ValidationError('Cantidad no valida')
+
+        if res<1:
+            raise ValidationError("Minimo debe haber un producto")
+
 

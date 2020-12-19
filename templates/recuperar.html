@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         {{form.correo(class="form-control",id="txtCorreo",placeholder="ejemplo@ejemplo.com")}}
                         {% for error in form.correo.errors %}
-                            <span style="color: red;">{{ error }}</span>
+                            <span style="color: red;">{{ error }}</span><br>
                         {% endfor %}
                     </div>
                 </div>

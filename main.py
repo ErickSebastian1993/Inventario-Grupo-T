@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for,flash,redirect,request
-from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario,FormularioNuevoProducto
+from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario,FormularioNuevoProducto,FormularioActualizarAdmin
 
 app = Flask(__name__)
 app.config.update(SECRET_KEY="la_llave")
@@ -15,15 +15,16 @@ def index():
 @app.route("/home",methods=['GET', 'POST'])
 def home():
     usuario=FormularioNuevoUsuario()
-    #producto=FormularioNuevoProducto()
-
+    producto=FormularioNuevoProducto()
+    actualizar=FormularioActualizarAdmin()
     if request.method=="POST":
-        if usuario.validate_on_submit():
+        if usuario.enviar.data and usuario.validate():
             return redirect("/home")
-        else:
-            return render_template("home.html",form=usuario)
-    else:
-        return render_template("home.html",form=usuario)
+        if producto.enviar2.data and producto.validate():
+            return redirect('/home')
+        if actualizar.enviar3.data and actualizar.validate():
+            return redirect('/home')
+    return render_template("home.html",form=usuario,form2=producto,form3=actualizar)
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():
