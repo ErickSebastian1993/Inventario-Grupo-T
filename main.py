@@ -21,11 +21,13 @@ def home():
     productos = get_productos()
     if request.method=="POST":
         if usuario.enviar.data and usuario.validate():
+            insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,usuario.password.data,usuario.rol.data)
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
-            insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'Activo',producto.imagen.data)
+            insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'ACTIVO',producto.imagen.data)
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
+            actualizar_producto(actualizar.referencia.data,actualizar.producto.data,actualizar.precio.data,actualizar.cantidad.data,actualizar.imagen.data)
             return redirect('/home')
     return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos)
 

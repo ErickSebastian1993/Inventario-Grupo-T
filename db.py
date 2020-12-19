@@ -31,7 +31,6 @@ def get_productos():
 
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"','"+str(precio)+"', '"+str(cantidad)+"','"+estado+"','"+imagen+"');"
-
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
@@ -39,7 +38,7 @@ def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     con.close()
 
 def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
-    query = "UPDATE Producto SET referencia = '"+referencia+"', nombre = '"+nombre+"', precio = "+precio+", cantidad = "+cantidad+" WHERE referencia = '"+referencia+"');"
+    query = "UPDATE Producto SET referencia = '"+referencia+"', nombre = '"+nombre+"', precio = '"+str(precio)+"', cantidad = '"+str(cantidad)+"', imagen = '"+imagen+"' WHERE referencia = '"+referencia+"';"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
@@ -49,7 +48,7 @@ def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
 #def inactivar_producto(referencia):
 
 def insertar_usuario(nombre,correo,usuario,password,rol):
-    query = "INSERT INTO USUARIO (nombre,correo,usuario,password,rol) values('"+nombre+"', '"+correo+"','"+usuario+"','"+password+"','"+rol+");"
+    query = "INSERT INTO USUARIO (nombre,correo,usuario,password,rol) values('"+nombre+"', '"+correo+"','"+usuario+"','"+password+"','"+rol+"');"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
