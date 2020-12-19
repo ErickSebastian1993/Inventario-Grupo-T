@@ -271,7 +271,7 @@
                       <div class="row">
                         <label for="txtReferencia3" class="col-sm-2 form-label">Referencia: </label>
                         <div class="col-sm-10">
-                          {{form3.referencia(class="form-control",id="txtReferencia3",placeholder="Ingrese referencia",disabled=True)}}
+                          {{form3.referencia(class="form-control",id="txtReferencia3",placeholder="Ingrese referencia",readonly=True)}}
                           {% if form3.referencia.errors %}
                           {% for error in form3.referencia.errors %}
                           <span style="color: red;">{{ error }}</span><br>
