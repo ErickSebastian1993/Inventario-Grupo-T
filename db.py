@@ -30,15 +30,15 @@ def get_productos():
     return productos
 
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
-    query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"','"+precio+"', '"+cantidad+"','"+estado+"','"+imagen+");"
+    query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"',"+precio+", "+cantidad+",'ACTIVO',"+imagen+");"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
     con.commit()
     con.close()
 
-def actualizar_producto(referencia,nombre,precio,cantidad,estado,imagen):
-    query = "UPDATE Producto SET referencia = '"+referencia+"', nombre = '"+nombre+"', precio = '"+precio+"', cantidad = '"+cantidad+"', estado = '"+estado+"', imagen = '"+imagen+"'  WHERE referencia = '"+referencia+"');"
+def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
+    query = "UPDATE Producto SET referencia = '"+referencia+"', nombre = '"+nombre+"', precio = "+precio+", cantidad = "+cantidad+" WHERE referencia = '"+referencia+"');"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
@@ -56,11 +56,11 @@ def insertar_usuario(nombre,correo,usuario,password,rol):
     con.close()
 
 def validar_sesion(usuario,contraseña):
-    query = "SELECT usuario,contraseña FROM Usuario WHERE usuario = '"+usuario+"' AND password = '"+password+"';"
+    query = "SELECT usuario,contraseña FROM Usuario WHERE usuario = "+usuario+" AND password = "+password+";"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
     con.commit()
-    usuarios = cursorObj.fetchall()
+    usuario = cursorObj.fetchall()
     con.close()
-    return usuarios
+    return usuario
