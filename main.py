@@ -10,7 +10,11 @@ app.config.update(SECRET_KEY="la_llave")
 def index():
     form = FormularioLogin()
     if form.validate_on_submit():
-        return redirect("/home")
+        validar = validar_sesion(form.user.data,form.password.data)
+        if validar:
+            return redirect("/home")
+        else:
+            flash("Usuario o Contraseña incorrectos.")
     return render_template("index.html",form=form)
 
 @app.route("/home",methods=['GET', 'POST'])
