@@ -38,7 +38,10 @@ def home():
             filename=images.save(producto.imagen.data)
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
+            print("Hello123")
             actualizar_producto(actualizar.referencia.data,actualizar.producto.data,actualizar.precio.data,actualizar.cantidad.data,actualizar.imagen.data)
+            if actualizar.imagen.data == "":
+                filename=images.save(actualizar.imagen.data)
             return redirect('/home')
     return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos)
 

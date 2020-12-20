@@ -9,10 +9,10 @@ def sql_connection():
         print(Error)
 
 def consultar_producto(nombre):
-    query = "SELECT * FROM Producto WHERE nombre = '"+nombre+"';"
+    query = "SELECT * FROM Producto WHERE nombre = ?;"
     con = sql_connection()
     cursorObj = con.cursor()
-    cursorObj.execute(query)
+    cursorObj.execute(query,(nombre))
     con.commit()
     producto = cursorObj.fetchall()
     con.close()
@@ -38,12 +38,24 @@ def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     con.close()
 
 def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
-    query = "UPDATE Producto SET referencia = '"+referencia+"', nombre = '"+nombre+"', precio = '"+str(precio)+"', cantidad = '"+str(cantidad)+"', imagen = '"+imagen+"' WHERE referencia = '"+referencia+"';"
-    con = sql_connection()
-    cursorObj = con.cursor()
-    cursorObj.execute(query)
-    con.commit()
-    con.close()    
+    tprecio=str(precio)
+    tcantidad=str(cantidad)
+    if imagen.filename=='':
+        query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ? WHERE referencia = ?;"  
+        con = sql_connection()
+        cursorObj = con.cursor()
+        cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,referencia))
+        con.commit()
+        con.close()   
+    else:
+        resimagen='../static/img/'+imagen.filename
+        query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ?, imagen = ? WHERE referencia = ?;"
+        con = sql_connection()
+        cursorObj = con.cursor()
+        cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,resimagen,referencia))
+        con.commit()
+        con.close()   
+     
 
 def insertar_usuario(nombre,correo,usuario,password,rol):
     query = "INSERT INTO USUARIO (nombre,correo,usuario,password,rol) values(?,?,?,?,?);"
