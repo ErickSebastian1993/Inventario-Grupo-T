@@ -1,9 +1,15 @@
 from flask import Flask,render_template,url_for,flash,redirect,request
 from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario,FormularioNuevoProducto,FormularioActualizarAdmin
 from db import *
+from flask_uploads import configure_uploads,IMAGES,UploadSet
+
 
 app = Flask(__name__)
 app.config.update(SECRET_KEY="la_llave")
+app.config['UPLOADED_IMAGES_DEST']='static/img'
+
+images=UploadSet('images',IMAGES)
+configure_uploads(app,images)
 
 @app.route("/",methods=['GET', 'POST'])
 @app.route("/index",methods=['GET', 'POST'])
@@ -29,6 +35,7 @@ def home():
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
             insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'ACTIVO',producto.imagen.data)
+            filename=images.save(producto.imagen.data)
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
             actualizar_producto(actualizar.referencia.data,actualizar.producto.data,actualizar.precio.data,actualizar.cantidad.data,actualizar.imagen.data)

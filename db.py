@@ -4,7 +4,6 @@ from sqlite3 import Error
 def sql_connection():
     try:
         con = sqlite3.connect('Inventario.db')
-        #flash('Me conecté!',con)
         return con
     except Error:
         print(Error)
@@ -30,11 +29,11 @@ def get_productos():
     return productos
 
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
-    #query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values('"+referencia+"','"+nombre+"','"+str(precio)+"', '"+str(cantidad)+"','"+estado+"','"+imagen+"');"
+    resimagen='../static/img/'+imagen.filename
     query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values(?,?,?,?,?,?)" 
     con = sql_connection()
     cursorObj = con.cursor()
-    cursorObj.execute(query,(referencia,nombre,precio,cantidad,estado,imagen))
+    cursorObj.execute(query,(referencia,nombre,precio,cantidad,estado,resimagen))
     con.commit()
     con.close()
 
@@ -45,8 +44,6 @@ def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
     cursorObj.execute(query)
     con.commit()
     con.close()    
-
-#def inactivar_producto(referencia):
 
 def insertar_usuario(nombre,correo,usuario,password,rol):
     query = "INSERT INTO USUARIO (nombre,correo,usuario,password,rol) values(?,?,?,?,?);"
