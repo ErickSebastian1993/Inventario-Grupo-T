@@ -29,7 +29,10 @@ def get_productos():
     return productos
 
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
-    resimagen='../static/img/'+imagen.filename
+    try:
+        resimagen='../static/img/'+imagen.filename
+    except:
+        resimagen='../static/img/'+imagen
     query = "INSERT INTO Producto (referencia,nombre,precio,cantidad,estado,imagen) values(?,?,?,?,?,?)" 
     con = sql_connection()
     cursorObj = con.cursor()
