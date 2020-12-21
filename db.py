@@ -68,12 +68,32 @@ def insertar_usuario(nombre,correo,usuario,password,rol):
     con.commit()
     con.close()
 
-def validar_sesion(usuario,password):
-    query = "SELECT * FROM Usuario WHERE usuario = ? AND password = ?;"
+def validar_usuario(usuario):
+    query = "SELECT * FROM Usuario WHERE usuario = ?;"
     con = sql_connection()
     cursorObj = con.cursor()
-    cursorObj.execute(query,(usuario,password))
+    cursorObj.execute(query,[usuario])
     con.commit()
     usuario = cursorObj.fetchall()
     con.close()
     return usuario
+
+def validar_password(usuario,password):
+    query = "SELECT * FROM Usuario WHERE usuario = ? and password = ?;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(query,(str(usuario),str(password)))
+    con.commit()
+    rs = cursorObj.fetchall()
+    con.close()
+    return rs
+
+def get_usuarios():
+    query = "SELECT nombre,rol FROM Usuario;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(query)
+    con.commit()
+    rs = cursorObj.fetchall()
+    con.close()
+    return rs

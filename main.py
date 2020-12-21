@@ -1,4 +1,4 @@
-from flask import Flask,render_template,url_for,flash,redirect,request
+from flask import Flask,render_template,url_for,flash,redirect,request,session
 from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario,FormularioNuevoProducto,FormularioActualizarAdmin
 from db import *
 from flask_uploads import configure_uploads,IMAGES,UploadSet
@@ -11,24 +11,45 @@ app.config['UPLOADED_IMAGES_DEST']='static/img'
 images=UploadSet('images',IMAGES)
 configure_uploads(app,images)
 
+def esAdmin():
+    return session.get("usuario").get("rol") == "Administrador"
+
+def esVendor():
+    return session.get("usuario").get("rol") == "Vendedor"
+
+def usuarioLogeado():
+    return session.get("usuario")
+
 @app.route("/",methods=['GET', 'POST'])
 @app.route("/index",methods=['GET', 'POST'])
 def index():
+    #if not session.get("usuario"):
     form = FormularioLogin()
+        
     if form.validate_on_submit():
-        validar = validar_sesion(form.user.data,form.password.data)
-        if validar:
-            return redirect("/home")
+        user = validar_usuario(form.user.data)
+        print (user)
+        if user:
+            validarContra = validar_password(user[0][2],user[0][3])
+            print (validarContra)
+            if validarContra:
+                print("pase")
+                session["usuario"] = {"nom_usuario":user[0][2],"rol":user[0][4]}
+                return redirect(url_for("home"))
         else:
             flash("Usuario o Contraseña incorrectos.")
     return render_template("index.html",form=form)
 
 @app.route("/home",methods=['GET', 'POST'])
 def home():
+    #if not usuarioLogeado():
+     #   return redirect("/index")
+
     usuario=FormularioNuevoUsuario()
     producto=FormularioNuevoProducto()
     actualizar=FormularioActualizarAdmin()
     productos = get_productos()
+
     if request.method=="POST":
         if usuario.enviar.data and usuario.validate():
             insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,usuario.password.data,usuario.rol.data)
@@ -55,6 +76,14 @@ def recuperar():
         # Quisiera colocarle al usuario un timed pop up en la parte inferior izquierda diciendole que ya se le envio el correo
         return redirect("/")
     return render_template("recuperar.html",form=form)
+
+@app.route("/logout",methods=['POST'])
+def recuperar():
+    session.pop("usuario")
+    flash("Sesión Cerrada.")
+    return redirect("/index")
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5000,debug=True)
