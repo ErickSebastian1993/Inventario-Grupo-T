@@ -51,22 +51,21 @@ def home():
             insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,usuario.password.data,usuario.rol.data)
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
-            estado='ACTIVO'
-            if producto.estado.data==False:
-                estado='INACTIVO'
-            # Se que no es la mejor forma pero bueno
             try:
                 if producto.imagen.data.filename!='':
-                    insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,producto.imagen.data)
+                    insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,producto.estado.data,producto.imagen.data)
                     filename=images.save(producto.imagen.data)
             except:
-                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,'noimage.jpg')
+                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,producto.estado.data,'noimage.jpg')
 
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():
-            actualizar_producto(actualizar.referencia.data,actualizar.producto.data,actualizar.precio.data,actualizar.cantidad.data,actualizar.imagen.data)
-            if actualizar.imagen.data == "":
-                filename=images.save(actualizar.imagen.data)
+            actualizar_producto(actualizar.referencia.data,actualizar.producto.data,actualizar.precio.data,actualizar.cantidad.data,actualizar.estado.data,actualizar.imagen.data)
+            try:
+                if actualizar.imagen.data == "":
+                    filename=images.save(actualizar.imagen.data)
+            except:
+                pass
             return redirect('/home')
     return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos)
 

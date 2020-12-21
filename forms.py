@@ -61,6 +61,7 @@ class FormularioActualizarAdmin(FlaskForm):
     producto=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
     cantidad=StringField('Cantidad')
     precio=StringField('Precio')
+    estado=BooleanField('Estado',default="checked")
     imagen=FileField('Imagen')
     enviar3=SubmitField('Actualizar')
 

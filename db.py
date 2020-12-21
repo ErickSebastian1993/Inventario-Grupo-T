@@ -19,7 +19,7 @@ def consultar_producto(nombre):
     return producto
 
 def get_productos():
-    query = "SELECT * FROM Producto WHERE estado='ACTIVO';"
+    query = "SELECT * FROM Producto WHERE estado=1;"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
@@ -40,24 +40,27 @@ def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     con.commit()
     con.close()
 
-def actualizar_producto(referencia,nombre,precio,cantidad,imagen):
+def actualizar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     tprecio=str(precio)
     tcantidad=str(cantidad)
-    if imagen.filename=='':
-        query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ? WHERE referencia = ?;"  
+    try:
+        if imagen.filename!='':
+            resimagen='../static/img/'+imagen.filename
+            query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ?,estado=?, imagen = ? WHERE referencia = ?;"
+            con = sql_connection()
+            cursorObj = con.cursor()
+            cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,estado,resimagen,referencia))
+            con.commit()
+            con.close()  
+
+    except:
+        query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ?, estado=? WHERE referencia = ?;"  
         con = sql_connection()
         cursorObj = con.cursor()
-        cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,referencia))
+        cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,estado,referencia))
         con.commit()
         con.close()   
-    else:
-        resimagen='../static/img/'+imagen.filename
-        query = "UPDATE Producto SET referencia = ?, nombre = ?, precio = ?, cantidad = ?, imagen = ? WHERE referencia = ?;"
-        con = sql_connection()
-        cursorObj = con.cursor()
-        cursorObj.execute(query,(referencia,nombre,tprecio,tcantidad,resimagen,referencia))
-        con.commit()
-        con.close()   
+         
      
 
 def insertar_usuario(nombre,correo,usuario,password,rol):
