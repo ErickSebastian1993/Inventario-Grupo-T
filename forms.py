@@ -24,7 +24,9 @@ class FormularioNuevoUsuario(FlaskForm):
         validators.regexp(regex=".*[A-Z]",message="Debe tener minimo una mayuscula"),
         validators.regexp(regex=".*[0-9]",message="Debe tener minimo un numero") 
     ])
-    confirm=PasswordField('Confirmar contraseña')
+    confirm=PasswordField('Confirmar contraseña',[
+        validators.DataRequired(message="Por favor completa con la contraseña del campo anterior")
+    ])
     rol=SelectField('Rol',choices=[('Administrador','Administrador'),('Vendedor','Vendedor')])
     enviar=SubmitField('Registrar')
 
@@ -84,3 +86,15 @@ class FormularioActualizarAdmin(FlaskForm):
             raise ValidationError("Minimo debe haber un producto")
 
 
+class FormularioReseteo(FlaskForm):
+    contra = StringField('Contraseña',[
+        validators.DataRequired(message="Por favor completa con una contraseña"),
+        validators.EqualTo('contra2',message="Contraseñas deben ser iguales"),
+        validators.length(min=6,message="Longitud minima de 6 caracteres"),
+        validators.regexp(regex=".*[A-Z]",message="Debe tener minimo una mayuscula"),
+        validators.regexp(regex=".*[0-9]",message="Debe tener minimo un numero") 
+    ])
+    contra2 = StringField('Repetir contraseña', [
+        validators.DataRequired(message="Por favor escriba la contraseña del campo anterior")
+    ])
+    submit = SubmitField('Cambiar contraseña')

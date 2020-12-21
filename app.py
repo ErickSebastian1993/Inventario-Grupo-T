@@ -1,12 +1,23 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,session
-from forms import FormularioLogin,FormularioRecuperar,FormularioNuevoUsuario,FormularioNuevoProducto,FormularioActualizarAdmin
+from forms import *
 from db import *
 from flask_uploads import configure_uploads,IMAGES,UploadSet
-
+from time import time
+import jwt
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+
 app.config.update(SECRET_KEY="la_llave")
 app.config['UPLOADED_IMAGES_DEST']='static/img'
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'inventariot3@gmail.com'
+app.config['MAIL_PASSWORD'] = '&Inventario12'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail= Mail(app)
 
 images=UploadSet('images',extensions=('jpg', 'jpe', 'jpeg', 'png'))
 configure_uploads(app,images)
@@ -19,6 +30,23 @@ def esVendor():
 
 def usuarioLogeado():
     return session.get("usuario")
+
+def obtener_token(id,expires_in=600):
+    return jwt.encode({'reset_password':id,'exp':time()+expires_in},app.config["SECRET_KEY"],algorithm="HS256").decode('utf-8')
+
+def enviar_correo(usuario):
+    token=obtener_token(usuario[0][2])
+    msg=Message('Recuperar contraseña',sender='inventariot3@gmail.com',recipients=[usuario[0][1]])
+    msg.body="Tu token es: "+url_for('reset',token=token,_external=True)
+    mail.send(msg)
+    #send_email('')
+
+def verificacion_token(token):
+    try:
+        id = jwt.decode(token, app.config['SECRET_KEY'],algorithms=['HS256'])['reset_password']
+    except:
+        return
+    return id
 
 @app.route("/",methods=['GET', 'POST'])
 @app.route("/index",methods=['GET', 'POST'])
@@ -71,9 +99,14 @@ def home():
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():
+    if usuarioLogeado():
+        return redirect("/home")
     form=FormularioRecuperar()
     if form.validate_on_submit():
-        # Quisiera colocarle al usuario un timed pop up en la parte inferior izquierda diciendole que ya se le envio el correo
+        # Aca tengo que hacer query para encontrar el usuario dada un email
+        usuario=obtener_usuario(form.correo.data) #No estoy seguro que necesite todo el usuario
+        if usuario:
+            enviar_correo(usuario)
         return redirect("/")
     return render_template("recuperar.html",form=form)
 
@@ -83,6 +116,19 @@ def cerrarSesion():
     flash("Sesión Cerrada.")
     return redirect("/index")
 
+
+@app.route("/reset/<token>",methods=['GET','POST'])
+def reset(token):
+    if usuarioLogeado():
+        return redirect(url_for('home'))
+    usuario=verificacion_token(token)
+    if not usuario:
+        return redirect(url_for('index'))
+    formulario=FormularioReseteo()
+    if formulario.validate_on_submit():
+        cambiar_password(formulario.contra.data,usuario)
+        return redirect(url_for('index'))
+    return render_template("reset.html",formulario=formulario)
 
 
 if __name__ == "__main__":

@@ -8,9 +8,9 @@
                 {{ form.hidden_tag() }} 
                 <h1>Recuperar contraseña</h1>
                 <p>Ingrese su correo electrónico para recibir una nueva contraseña.</p>
-                <div class="row mb-3">
-                    <label for="txtCorreo" class="col-sm-4 form-label">Correo Electrónico:</label>
-                    <div class="col-sm-6">
+                <div class="row">
+                    <label for="txtCorreo" class="col-sm-3 form-label">Correo Electrónico:</label>
+                    <div class="col-sm-7">
                         {{form.correo(class="form-control",id="txtCorreo",placeholder="ejemplo@ejemplo.com")}}
                         {% for error in form.correo.errors %}
                             <span style="color: red;">{{ error }}</span><br>

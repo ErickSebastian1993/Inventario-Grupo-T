@@ -71,6 +71,16 @@ def insertar_usuario(nombre,correo,usuario,password,rol):
     con.commit()
     con.close()
 
+def obtener_usuario(email):
+    query="SELECT * FROM Usuario WHERE correo = ?"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(query,[email])
+    con.commit()
+    usuario = cursorObj.fetchall()
+    con.close()
+    return usuario
+
 def validar_usuario(usuario):
     query = "SELECT * FROM Usuario WHERE usuario = ?;"
     con = sql_connection()
@@ -100,3 +110,11 @@ def get_usuarios():
     rs = cursorObj.fetchall()
     con.close()
     return rs
+
+def cambiar_password(password,usuario):
+    query = "UPDATE Usuario SET password = ?  WHERE usuario = ?;"  
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(query,(password,usuario))
+    con.commit()
+    con.close()
