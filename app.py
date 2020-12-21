@@ -23,17 +23,13 @@ def usuarioLogeado():
 @app.route("/",methods=['GET', 'POST'])
 @app.route("/index",methods=['GET', 'POST'])
 def index():
-    #if not session.get("usuario"):
     form = FormularioLogin()
         
     if form.validate_on_submit():
         user = validar_usuario(form.user.data)
-        print (user)
         if user:
             validarContra = validar_password(user[0][2],user[0][3])
-            print (validarContra)
             if validarContra:
-                print("pase")
                 session["usuario"] = {"nom_usuario":user[0][2],"rol":user[0][4]}
                 return redirect(url_for("home"))
         else:
@@ -42,8 +38,8 @@ def index():
 
 @app.route("/home",methods=['GET', 'POST'])
 def home():
-    #if not usuarioLogeado():
-     #   return redirect("/index")
+    if not usuarioLogeado():
+        return redirect("/index")
 
     usuario=FormularioNuevoUsuario()
     producto=FormularioNuevoProducto()
@@ -77,8 +73,8 @@ def recuperar():
         return redirect("/")
     return render_template("recuperar.html",form=form)
 
-@app.route("/logout",methods=['POST'])
-def recuperar():
+@app.route("/cerrar",methods=['GET','POST'])
+def cerrarSesion():
     session.pop("usuario")
     flash("Sesión Cerrada.")
     return redirect("/index")

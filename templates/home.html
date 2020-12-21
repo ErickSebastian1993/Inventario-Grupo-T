@@ -21,7 +21,7 @@
         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand order-md-last" href="#">Administrador</a>
+      <!-- <a class="navbar-brand order-md-last" href="#">Administrador</a> -->
       <div class="dropdown order-md-last dropstart">
         <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton"
           data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,7 +30,7 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo usuario</a></li>
           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal2">Nuevo producto</a></li>
-          <li><a class="dropdown-item" href="{{ url_for('index') }}">Salir</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('cerrarSesion') }}">Salir</a></li>
         </ul>
       </div>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
