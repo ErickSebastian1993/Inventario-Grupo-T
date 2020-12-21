@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators,FileField,BooleanField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators,BooleanField
 from wtforms.fields.html5 import EmailField
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import ValidationError
 
 class FormularioLogin(FlaskForm):
@@ -33,7 +34,9 @@ class FormularioNuevoProducto(FlaskForm):
     cantidad=StringField('Cantidad')
     precio=StringField('Precio')
     estado=BooleanField('Estado',default="checked")
-    imagen=FileField('Imagen')
+    imagen=FileField('Imagen',validators=[
+        FileAllowed(['jpg', 'jpe', 'jpeg', 'png'], 'Solo se aceptan imagenes')
+    ])
     enviar2=SubmitField('Crear producto')
     def validate_precio(form,field):
         try:

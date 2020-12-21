@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.update(SECRET_KEY="la_llave")
 app.config['UPLOADED_IMAGES_DEST']='static/img'
 
-images=UploadSet('images',IMAGES)
+images=UploadSet('images',extensions=('jpg', 'jpe', 'jpeg', 'png'))
 configure_uploads(app,images)
 
 def esAdmin():
@@ -54,10 +54,12 @@ def home():
             estado='ACTIVO'
             if producto.estado.data==False:
                 estado='INACTIVO'
-            if producto.imagen.data.filename!='':
-                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,producto.imagen.data)
-                filename=images.save(producto.imagen.data)
-            else:
+            # Se que no es la mejor forma pero bueno
+            try:
+                if producto.imagen.data.filename!='':
+                    insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,producto.imagen.data)
+                    filename=images.save(producto.imagen.data)
+            except:
                 insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,'noimage.jpg')
 
             return redirect('/home')
