@@ -51,11 +51,14 @@ def home():
             insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,usuario.password.data,usuario.rol.data)
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
+            estado='ACTIVO'
+            if producto.estado.data==False:
+                estado='INACTIVO'
             if producto.imagen.data.filename!='':
-                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'ACTIVO',producto.imagen.data)
+                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,producto.imagen.data)
                 filename=images.save(producto.imagen.data)
             else:
-                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,'ACTIVO','noimage.jpg')
+                insertar_producto(producto.referencia.data,producto.producto.data,producto.precio.data,producto.cantidad.data,estado,'noimage.jpg')
 
             return redirect('/home')
         if actualizar.enviar3.data and actualizar.validate():

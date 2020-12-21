@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators,FileField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,SelectField,IntegerField,validators,FileField,BooleanField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import ValidationError
 
@@ -32,6 +32,7 @@ class FormularioNuevoProducto(FlaskForm):
     producto=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
     cantidad=StringField('Cantidad')
     precio=StringField('Precio')
+    estado=BooleanField('Estado',default="checked")
     imagen=FileField('Imagen')
     enviar2=SubmitField('Crear producto')
     def validate_precio(form,field):

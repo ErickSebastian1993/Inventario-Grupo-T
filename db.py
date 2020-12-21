@@ -19,7 +19,7 @@ def consultar_producto(nombre):
     return producto
 
 def get_productos():
-    query = "SELECT * FROM Producto;"
+    query = "SELECT * FROM Producto WHERE estado='ACTIVO';"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
