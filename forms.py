@@ -4,8 +4,10 @@ from wtforms.fields.html5 import EmailField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import ValidationError
 
+#PasswordField
+
 class FormularioLogin(FlaskForm):
-    user = StringField('Usuario', [validators.DataRequired(message="Por favor completa con el usuario")])
+    user = EmailField('Usuario', [validators.DataRequired(message="Por favor completa con el correo"),validators.Email(message="Correo no valido")])
     password = PasswordField('Contraseña', [validators.DataRequired(message='Por favor completa con la contraseña')])
     enviar = SubmitField('Iniciar Sesión')
 
@@ -29,6 +31,9 @@ class FormularioNuevoUsuario(FlaskForm):
     ])
     rol=SelectField('Rol',choices=[('Administrador','Administrador'),('Vendedor','Vendedor')])
     enviar=SubmitField('Registrar')
+
+class FormularioTodos(FlaskForm):
+    todos=BooleanField('Todos')
 
 class FormularioNuevoProducto(FlaskForm):
     referencia=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
@@ -86,15 +91,18 @@ class FormularioActualizarAdmin(FlaskForm):
             raise ValidationError("Minimo debe haber un producto")
 
 
+
+
+
 class FormularioReseteo(FlaskForm):
-    contra = StringField('Contraseña',[
+    contra = PasswordField('Contraseña',[
         validators.DataRequired(message="Por favor completa con una contraseña"),
         validators.EqualTo('contra2',message="Contraseñas deben ser iguales"),
         validators.length(min=6,message="Longitud minima de 6 caracteres"),
         validators.regexp(regex=".*[A-Z]",message="Debe tener minimo una mayuscula"),
         validators.regexp(regex=".*[0-9]",message="Debe tener minimo un numero") 
     ])
-    contra2 = StringField('Repetir contraseña', [
+    contra2 = PasswordField('Repetir contraseña', [
         validators.DataRequired(message="Por favor escriba la contraseña del campo anterior")
     ])
     submit = SubmitField('Cambiar contraseña')
