@@ -45,6 +45,15 @@
   </nav>
 
   <div class="container">
+    <form method="post">
+      {{form4.hidden_tag()}}
+      {{form4.todos(onchange="this.form.submit()")}}
+      <!-- <input type="checkbox" id="todos" name="todos" onchange="this.form.submit()"> -->
+      <label for="todos">Mostrar todos los productos</label>
+    </form>  
+  </div>
+
+  <div class="container">
     <div class="row">
       {% for producto in productos %}
       <div class="card" style="width: 18rem;">
@@ -74,6 +83,20 @@
             </div>
             <div class="col-sm-6">
               <p class="card-text">{{producto[2]}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="">Estado:</label>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text">
+                {% if producto[4]=="1" %}
+                   Activo
+                {% else %}
+                   Inactivo
+                {% endif %}
+              </p>
             </div>
           </div>
           <div class="text-center">

@@ -28,6 +28,16 @@ def get_productos():
     con.close()
     return productos
 
+def get_all():
+    query = "SELECT * FROM Producto;"
+    con = sql_connection()
+    cursorObj = con.cursor()
+    cursorObj.execute(query)
+    con.commit()
+    productos = cursorObj.fetchall()
+    con.close()
+    return productos
+
 def insertar_producto(referencia,nombre,precio,cantidad,estado,imagen):
     try:
         resimagen='../static/img/'+imagen.filename

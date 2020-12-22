@@ -75,9 +75,12 @@ def home():
     usuario=FormularioNuevoUsuario()
     producto=FormularioNuevoProducto()
     actualizar=FormularioActualizarAdmin()
+    todos=FormularioTodos()
     productos = get_productos()
-
     if request.method=="POST":
+        if todos.validate_on_submit():
+            if todos.todos.data:
+                productos=get_all()
         if usuario.enviar.data and usuario.validate():
             insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,generate_password_hash(usuario.password.data),usuario.rol.data)
             return redirect("/home")
@@ -98,7 +101,7 @@ def home():
             except:
                 pass
             return redirect('/home')
-    return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos)
+    return render_template("home.html",form=usuario,form2=producto,form3=actualizar,productos = productos,form4=todos)
 
 @app.route("/recuperar",methods=['GET', 'POST'])
 def recuperar():

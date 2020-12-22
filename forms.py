@@ -32,6 +32,9 @@ class FormularioNuevoUsuario(FlaskForm):
     rol=SelectField('Rol',choices=[('Administrador','Administrador'),('Vendedor','Vendedor')])
     enviar=SubmitField('Registrar')
 
+class FormularioTodos(FlaskForm):
+    todos=BooleanField('Todos')
+
 class FormularioNuevoProducto(FlaskForm):
     referencia=StringField('Referencia',[validators.DataRequired(message="Por favor completa con la referencia del producto")])
     producto=StringField('Producto',[validators.DataRequired(message="Por favor completa con el nombre del producto")])
@@ -86,6 +89,9 @@ class FormularioActualizarAdmin(FlaskForm):
 
         if res<1:
             raise ValidationError("Minimo debe haber un producto")
+
+
+
 
 
 class FormularioReseteo(FlaskForm):
