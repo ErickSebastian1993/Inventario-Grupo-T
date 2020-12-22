@@ -1,10 +1,12 @@
 from flask import Flask,render_template,url_for,flash,redirect,request,session
-from forms import *
-from db import *
 from flask_uploads import configure_uploads,IMAGES,UploadSet
 from time import time
 import jwt
 from flask_mail import Mail, Message
+from werkzeug.security import generate_password_hash,check_password_hash
+
+from forms import *
+from db import *
 
 app = Flask(__name__)
 
@@ -56,7 +58,7 @@ def index():
     if form.validate_on_submit():
         user = validar_usuario(form.user.data)
         if user:
-            validarContra = validar_password(user[0][2],user[0][3])
+            validarContra = check_password_hash(user[0][3],form.password.data)
             if validarContra:
                 session["usuario"] = {"nom_usuario":user[0][2],"rol":user[0][4]}
                 return redirect(url_for("home"))
@@ -76,7 +78,7 @@ def home():
 
     if request.method=="POST":
         if usuario.enviar.data and usuario.validate():
-            insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,usuario.password.data,usuario.rol.data)
+            insertar_usuario(usuario.name.data,usuario.email.data,usuario.user.data,generate_password_hash(usuario.password.data),usuario.rol.data)
             return redirect("/home")
         if producto.enviar2.data and producto.validate():
             try:
@@ -126,7 +128,7 @@ def reset(token):
         return redirect(url_for('index'))
     formulario=FormularioReseteo()
     if formulario.validate_on_submit():
-        cambiar_password(formulario.contra.data,usuario)
+        cambiar_password(generate_password_hash(formulario.contra.data),usuario)
         return redirect(url_for('index'))
     return render_template("reset.html",formulario=formulario)
 
