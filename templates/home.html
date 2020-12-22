@@ -434,15 +434,11 @@
             //<!-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3" >Editar</a> -->
             function actualizarProducto(referencia,nombre,precio,cantidad,estado) {
               var actualizarModal=new bootstrap.Modal(document.getElementById('exampleModal3'),{})
-              var aux=true
-              if(estado=='INACTIVO'){
-                aux=false
-              }
               document.getElementById("txtReferencia3").value=referencia
               document.getElementById("txtNomProducto3").value=nombre
               document.getElementById("txtCantidad3").value=cantidad
               document.getElementById("txtPrecio3").value=precio
-              document.getElementById("estado3").value=aux
+              document.getElementById("estado3").value=estado
               actualizarModal.show()
             }
           </script>

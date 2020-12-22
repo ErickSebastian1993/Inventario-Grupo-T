@@ -29,7 +29,7 @@ def get_productos():
     return productos
 
 def get_all():
-    query = "SELECT * FROM Producto;"
+    query = "SELECT * FROM Producto ORDER BY estado DESC;"
     con = sql_connection()
     cursorObj = con.cursor()
     cursorObj.execute(query)
