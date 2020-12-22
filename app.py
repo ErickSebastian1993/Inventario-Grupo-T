@@ -38,7 +38,7 @@ def obtener_token(id,expires_in=600):
 
 def enviar_correo(usuario):
     token=obtener_token(usuario[0][2])
-    msg=Message('Recuperar contraseña',sender='inventariot3@gmail.com',recipients=[usuario[0][1]])
+    msg=Message('Recuperar contraseña del inventario',sender='inventariot3@gmail.com',recipients=[usuario[0][1]])
     msg.body="Tu token es: "+url_for('reset',token=token,_external=True)
     mail.send(msg)
     #send_email('')
@@ -56,7 +56,7 @@ def index():
     form = FormularioLogin()
         
     if form.validate_on_submit():
-        user = validar_usuario(form.user.data)
+        user = obtener_usuario(form.user.data)
         if user:
             validarContra = check_password_hash(user[0][3],form.password.data)
             if validarContra:

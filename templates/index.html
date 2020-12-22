@@ -6,11 +6,11 @@
     <form id="logIn" action="" method="POST" novalidate>
       {{ form.hidden_tag() }} 
       <h1>Iniciar sesión</h1>
-      <p>Ingrese su usuario y contraseña.</p>
+      <p>Ingrese su correo y contraseña.</p>
       <div class="row mb-3">
-        <label for="txtUsuario" class="col-sm-3 col-form-label">Usuario:</label>
+        <label for="txtUsuario" class="col-sm-3 col-form-label">Correo:</label>
         <div class="col-sm-9">
-          {{form.user(class="form-control",id="txtUsuario",type="text",placeholder="Ingrese su usuario")}}
+          {{form.user(class="form-control",id="txtUsuario",type="text",placeholder="Ingrese su correo")}}
           {% for error in form.user.errors %}
             <span style="color: red;">{{ error }}</span>
           {% endfor %}
