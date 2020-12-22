@@ -39,7 +39,8 @@ def obtener_token(id,expires_in=600):
 def enviar_correo(usuario):
     token=obtener_token(usuario[0][2])
     msg=Message('Recuperar contraseña del inventario',sender='inventariot3@gmail.com',recipients=[usuario[0][1]])
-    msg.body="Tu token es: "+url_for('reset',token=token,_external=True)
+    #msg.body="Tu token es: "+url_for('reset',token=token,_external=True)
+    msg.html=render_template('email.html',usuario=usuario[0][2],token=token)
     mail.send(msg)
     #send_email('')
 
