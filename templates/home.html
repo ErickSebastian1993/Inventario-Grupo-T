@@ -22,6 +22,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- <a class="navbar-brand order-md-last" href="#">Administrador</a> -->
+      {% if session['usuario']['rol']=="Administrador" %}
       <div class="dropdown order-md-last dropstart">
         <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton"
           data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,11 +34,22 @@
           <li><a class="dropdown-item" href="{{ url_for('cerrarSesion') }}">Salir</a></li>
         </ul>
       </div>
+      {% else %}
+      <div class="dropdown order-md-last dropstart">
+        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Menu
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="{{ url_for('cerrarSesion') }}">Salir</a></li>
+        </ul>
+      </div>
+      {% endif %}
+
+
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          </form>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="color:white;">
+            {{session['usuario']['rol']}}
         </ul>
 
       </div>
@@ -49,7 +61,7 @@
       {{form4.hidden_tag()}}
       {{form4.todos(onchange="this.form.submit()")}}
       <!-- <input type="checkbox" id="todos" name="todos" onchange="this.form.submit()"> -->
-      <label for="todos">Mostrar todos los productos</label>
+      <label for="todos">Mostrar todos los productos </label>
     </form>  
   </div>
 
@@ -251,7 +263,7 @@
                     <div class="row">
                       <label for="estado2" class="col-sm-2 form-label">Estado: </label>
                       <div class="col-sm-10">
-                        {{form2.estado()}}
+                        {{form2.estado(checked=True)}}
                         {% if form2.estado.errors %}
                         {% for error in form2.estado.errors %}
                         <span style="color: red;">{{ error }}</span><br>
@@ -280,6 +292,7 @@
               </div>
             </div>
           </div>
+          {% if session['usuario']['rol']=="Administrador" %}
           <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -307,7 +320,7 @@
                       <div class="row ">
                         <label for="txtNomProducto3" class="col-sm-2 form-label">Producto:</label>
                         <div class="col-sm-10">
-                          {{form3.producto(class="form-control",id="txtNomProducto3",placeholder="Nombre del producto")}}
+                          {{form3.producto(class="form-control",id="txtNomProducto3",placeholder="Nombre del producto" )}}
                           {% if form3.producto.errors %}
                           {% for error in form3.producto.errors %}
                           <span style="color: red;">{{ error }}</span><br>
@@ -340,7 +353,7 @@
                       <div class="row">
                         <label for="estado3" class="col-sm-2 form-label">Estado: </label>
                         <div class="col-sm-10">
-                          {{form3.estado(id="estado3")}}
+                          {{form3.estado(id="estado3", checked=True)}}
                           {% if form3.estado.errors %}
                           {% for error in form3.estado.errors %}
                           <span style="color: red;">{{ error }}</span><br>
@@ -370,6 +383,99 @@
               </div>
             </div>
           </div>
+          {% else %}
+          <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Actualizar producto</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="registrarUsuario" action="" method="POST" enctype="multipart/form-data" novalidate>
+                    {{form3.hidden_tag()}}
+                    <p>Diligencie los campos a continuación.</p>
+                    <div class="container">
+                      <div class="row">
+                        <label for="txtReferencia3" class="col-sm-2 form-label">Referencia: </label>
+                        <div class="col-sm-10">
+                          {{form3.referencia(class="form-control",id="txtReferencia3",placeholder="Ingrese referencia",readonly=True)}}
+                          {% if form3.referencia.errors %}
+                          {% for error in form3.referencia.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %} <br> {% endif %}
+                        </div>
+                      </div>
+                      <div class="row ">
+                        <label for="txtNomProducto3" class="col-sm-2 form-label">Producto:</label>
+                        <div class="col-sm-10">
+                          {{form3.producto(class="form-control",id="txtNomProducto3",placeholder="Nombre del producto",readonly=True )}}
+                          {% if form3.producto.errors %}
+                          {% for error in form3.producto.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %} <br> {% endif %}
+                        </div>
+                      </div>
+                      <div class="row ">
+                        <label for="txtCantidad3" class="col-sm-2 form-label">Cantidad:</label>
+                        <div class="col-sm-10">
+                          {{form3.cantidad(class="form-control",id="txtCantidad3",placeholder="Cantidad del producto")}}
+                          {% if form3.cantidad.errors %}
+                          {% for error in form3.cantidad.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %} <br> {% endif %}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label for="txtPrecio3" class="col-sm-2 form-label">Precio:</label>
+                        <div class="col-sm-10">
+                          {{form3.precio(class="form-control",id="txtPrecio3",placeholder="Precio del producto",readonly=True)}}
+                          {% if form3.precio.errors %}
+                          {% for error in form3.precio.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %} <br> {% endif %}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label for="estado3" class="col-sm-2 form-label">Estado: </label>
+                        <div class="col-sm-10">
+                          {{form3.estado(id="estado3",checked=True)}}
+                          {% if form3.estado.errors %}
+                          {% for error in form3.estado.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %}<br>{% endif %}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label for="imagen3" class="col-sm-2 form-label">Imagen:</label>
+                        <div class="col-sm-10">
+                          {{form3.imagen(class="form-control",id="imagen3")}}
+                          {% if form3.imagen.errors %}
+                          {% for error in form3.imagen.errors %}
+                          <span style="color: red;">{{ error }}</span><br>
+                          {% endfor %}
+                          {% else %} <br> {% endif %}
+                        </div>
+                      </div>
+                      <div class="row d-flex justify-content-center mb-3">
+                        <div class="col-md-4">
+                          {{form3.enviar3(class="btn btn-outline-primary" ,id="btnActualizar")}}
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endif %}
           <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
